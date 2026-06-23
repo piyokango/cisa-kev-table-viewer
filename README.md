@@ -2,8 +2,6 @@
 
 CISA Known Exploited Vulnerabilities Catalog の JSON を、検索・絞り込み可能な表形式で表示する GitHub Pages 専用の静的 Web アプリです。
 
-Chrome 拡張機能としての構成は含めていません。`index.html`、`app.js`、`style.css` を GitHub Pages で配信するだけで動作します。
-
 ## 主な機能
 
 - CISA KEV 公式 JSON の取得
