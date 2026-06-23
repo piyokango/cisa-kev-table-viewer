@@ -2,7 +2,7 @@
 
 ## 対象
 
-GitHub Pages 専用の静的 Web アプリとしての CISA KEV Viewer を対象にしています。Chrome 拡張機能の権限、manifest、declarativeNetRequest は使用しません。
+GitHub Pages 専用の静的 Web アプリとしての CISA KEV Viewer を対象にしています。
 
 ## 外部入力
 
@@ -20,10 +20,6 @@ GitHub Pages 専用の静的 Web アプリとしての CISA KEV Viewer を対象
 - キャッシュはブラウザの `localStorage` に保存します。
 - 保存対象は CISA KEV の公開データと取得日時のみです。
 - 個人情報や認証情報は保存しません。
-
-## 権限
-
-GitHub Pages 専用のため、ブラウザ拡張機能の権限はありません。
 
 ## GitHub Actions
 
