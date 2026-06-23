@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CISA KEV Viewer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="kev-viewer-page">
+  <header>
+    <div class="titleBlock">
+      <h1>CISA KEV Viewer</h1>
+      <p id="summary">CISA KEV JSONを読み込み中...</p>
+    </div>
+    <div class="headerActions">
+      <span id="lastUpdated" class="metaChip"></span>
+      <a class="sourceLink" href="https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json?raw=1" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">元JSON</a>
+      <button id="refreshButton" type="button">更新</button>
+    </div>
+  </header>
+
+  <section class="toolbar" aria-label="検索と絞り込み">
+    <label class="searchBox">
+      <span>検索</span>
+      <input id="searchInput" type="search" placeholder="CVE、ベンダ、製品、脆弱性名、脆弱性種別、影響対象ジャンル、説明、必要な対応、CWE番号・名称で検索" autofocus>
+    </label>
+
+    <button id="clearFiltersButton" class="clearFiltersButton" type="button">条件クリア</button>
+
+    <label class="filterVulnerabilityType">
+      <span>脆弱性種別</span>
+      <select id="vulnerabilityTypeFilter">
+        <option value="all">すべて</option>
+      </select>
+    </label>
+
+    <label class="filterImpactTarget">
+      <span>影響対象ジャンル</span>
+      <select id="impactTargetFilter">
+        <option value="all">すべて</option>
+      </select>
+    </label>
+
+    <label class="filterVendor">
+      <span>ベンダ/プロジェクト</span>
+      <select id="vendorFilter">
+        <option value="all">すべて</option>
+      </select>
+    </label>
+
+    <label class="filterCwe">
+      <span>CWE（番号・名称）</span>
+      <select id="cweFilter">
+        <option value="all">すべて</option>
+      </select>
+    </label>
+
+    <label class="filterRansom">
+      <span>ランサムウェア利用</span>
+      <select id="ransomFilter">
+        <option value="all">すべて</option>
+        <option value="Known">確認済</option>
+        <option value="Unknown">未確認</option>
+      </select>
+    </label>
+
+    <div class="deadlineFilterLabel" role="group" aria-labelledby="deadlineFilterTitle">
+      <span id="deadlineFilterTitle" class="filterTitle">対応期限</span>
+      <div id="deadlineFilter" class="chipGroup" aria-label="対応期限 複数選択可">
+        <label><input type="checkbox" value="immediate">3日以内</label>
+        <label><input type="checkbox" value="critical">4〜14日以内</label>
+        <label><input type="checkbox" value="high">15〜21日以内</label>
+        <label><input type="checkbox" value="medium">22〜45日以内</label>
+        <label><input type="checkbox" value="low">46日以上</label>
+        <label><input type="checkbox" value="unknown">不明</label>
+      </div>
+    </div>
+
+    <label class="filterPageSize">
+      <span>表示件数</span>
+      <select id="pageSizeSelect">
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100" selected>100</option>
+        <option value="all">すべて</option>
+      </select>
+    </label>
+
+    <button id="exportButton" type="button">CSV出力</button>
+  </section>
+
+  <section class="statusPanel" aria-live="polite">
+    <div id="status"></div>
+  </section>
+
+  <main>
+    <div class="tableWrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-sort="vulnerabilityName">脆弱性名 / CVE</th>
+            <th data-sort="vendorProject">ベンダ/製品 / 影響対象</th>
+            <th data-sort="dateAdded">KEV追加日 / 対応期限</th>
+            <th data-sort="knownRansomwareCampaignUse">ランサムウェア利用</th>
+            <th>必要な対応</th>
+            <th>備考</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    <button id="prevButton" type="button">前へ</button>
+    <span id="pageInfo">-</span>
+    <button id="nextButton" type="button">次へ</button>
+  </footer>
+
+  <template id="emptyTemplate">
+    <tr>
+      <td colspan="6" class="empty">該当するKEV項目はありません。</td>
+    </tr>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

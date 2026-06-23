@@ -1,0 +1,509 @@
+:root {
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+  --text: #17202a;
+  --muted: #64748b;
+  --border: #d9e1ec;
+  --border-strong: #c6d1df;
+  --accent: #174ea6;
+  --accent-weak: #e8f0fe;
+  --accent-text: #ffffff;
+  --danger-bg: #fff1f2;
+  --danger-text: #be123c;
+  --shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  width: 1100px;
+  max-width: 100vw;
+  margin: 0;
+  color: var(--text);
+  background: var(--bg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body.kev-viewer-page {
+  width: 100%;
+  max-width: none;
+  min-height: 100vh;
+}
+
+header,
+.toolbar,
+.statusPanel,
+footer {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 18px;
+}
+
+body.kev-viewer-page header,
+body.kev-viewer-page .toolbar,
+body.kev-viewer-page .statusPanel,
+body.kev-viewer-page footer {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03);
+}
+
+.titleBlock { min-width: 0; }
+
+h1 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+}
+
+p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+button,
+select,
+input { font: inherit; }
+
+button {
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 8px 13px;
+  background: var(--accent);
+  color: var(--accent-text);
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
+}
+
+button:hover:not(:disabled) { filter: brightness(1.04); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.headerActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.metaChip,
+.sourceLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: var(--surface-soft);
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.sourceLink { background: #fff; color: var(--accent); }
+
+.toolbar {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: end;
+  gap: 10px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.toolbar .searchBox { grid-column: span 10; }
+.toolbar .filterVulnerabilityType { grid-column: span 2; }
+.toolbar .filterImpactTarget { grid-column: span 2; }
+.toolbar .filterVendor { grid-column: span 3; }
+.toolbar .filterCwe { grid-column: span 3; }
+.toolbar .filterRansom { grid-column: span 2; }
+.toolbar .filterPageSize { grid-column: span 2; }
+.toolbar .deadlineFilterLabel { grid-column: span 7; }
+.toolbar #exportButton { grid-column: span 3; min-height: 38px; }
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+label > span,
+.filterTitle {
+  color: #475569;
+  letter-spacing: 0.01em;
+}
+
+input,
+select {
+  width: 100%;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  padding: 8px 9px;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(23, 78, 166, 0.12);
+}
+
+.searchBox input {
+  min-height: 44px;
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 14px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.clearFiltersButton {
+  grid-column: span 2;
+  min-height: 44px;
+  border-color: var(--border-strong);
+  background: #fff;
+  color: #334155;
+  box-shadow: none;
+}
+
+.clearFiltersButton:hover:not(:disabled) { background: #f8fafc; filter: none; }
+
+.deadlineFilterLabel {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  min-height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 6px 8px;
+  background: var(--surface-soft);
+}
+
+.deadlineFilterLabel .filterTitle {
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.chipGroup {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 5px;
+  overflow-x: auto;
+  padding-bottom: 1px;
+}
+
+.chipGroup label {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 4px 7px;
+  background: #fff;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.chipGroup input { width: auto; margin: 0; accent-color: var(--accent); }
+
+.statusPanel {
+  color: var(--danger-text);
+  font-size: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.statusPanel[hidden] { display: none; }
+
+main { padding: 14px; }
+body.kev-viewer-page main { padding: 18px 24px; }
+
+.tableWrap {
+  max-height: 560px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+body.kev-viewer-page .tableWrap { max-height: calc(100vh - 260px); }
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--surface);
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 9px 11px;
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.45;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border-bottom: 1px solid var(--border-strong);
+  background: linear-gradient(#f8fafc, #eef3f9);
+  color: #27364a;
+  font-size: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+td { background: #fff; font-size: 12px; }
+tr:hover td { background: #fbfdff; }
+
+th:nth-child(1), td:nth-child(1) { min-width: 390px; }
+th:nth-child(2), td:nth-child(2) { min-width: 250px; }
+th:nth-child(3), td:nth-child(3) { min-width: 220px; white-space: nowrap; }
+th:nth-child(4), td:nth-child(4) { min-width: 126px; white-space: nowrap; }
+th:nth-child(5), td:nth-child(5) { min-width: 270px; }
+th:nth-child(6), td:nth-child(6) { min-width: 320px; }
+
+.vulnNameCell,
+.productCell,
+.actionCell,
+.notesCell,
+.dateDeadlineCell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vulnTopLine {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.vulnTypeBadge,
+.badge,
+.actionCategory,
+.deadlineBadge,
+.impactTag,
+.noteSourceBadge {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.vulnTypeBadge {
+  padding: 3px 9px;
+  border: 1px solid #bbf7d0;
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.vulnCveLink a { font-weight: 900; white-space: nowrap; }
+.vulnOriginalName,
+.productName,
+.noteText { color: #334155; }
+.vendorName { color: #0f172a; font-weight: 900; }
+
+.vulnCweBlock {
+  margin-top: 4px;
+  padding-top: 7px;
+  border-top: 1px dashed var(--border);
+}
+
+.cweList {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  white-space: normal;
+}
+
+.cweList a { font-weight: 650; }
+
+.impactTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.impactTag {
+  padding: 2px 7px;
+  border: 1px solid transparent;
+  font-size: 11px;
+  background: #eef2f8;
+  color: #334155;
+}
+
+.impactTagServer { background: #e0f2fe; color: #075985; border-color: #bae6fd; }
+.impactTagClient { background: #f5f3ff; color: #5b21b6; border-color: #ddd6fe; }
+.impactTagWindows { background: #e8f0fe; color: #174ea6; border-color: #c7d8ff; }
+.impactTagMacos { background: #f8fafc; color: #334155; border-color: #cbd5e1; }
+.impactTagLinux { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+.impactTagBrowser { background: #ecfdf5; color: #047857; border-color: #bbf7d0; }
+.impactTagIot { background: #fff7ed; color: #c2410c; border-color: #fed7aa; }
+.impactTagNetwork { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+.impactTagOther { background: #f1f5f9; color: #475569; border-color: #e2e8f0; }
+
+.dateLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.dateMetaLabel {
+  min-width: 42px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .03em;
+}
+
+.dateValue { color: #0f172a; font-weight: 800; }
+
+.deadlineBadge {
+  padding: 4px 9px;
+  border: 1px solid transparent;
+}
+
+.deadlineImmediate { background: #3f0d12; color: #fff; border-color: #3f0d12; box-shadow: 0 0 0 2px rgba(127, 29, 29, 0.18); }
+.deadlineCritical { background: #7f1d1d; color: #fff; border-color: #7f1d1d; }
+.deadlineHigh { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
+.deadlineMedium { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+.deadlineLow { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+.deadlineUnknown { background: #f1f5f9; color: #475569; border-color: #e2e8f0; }
+
+.badge {
+  padding: 3px 9px;
+  background: #eef2f8;
+  color: #334155;
+}
+
+.badge.known { background: var(--danger-bg); color: var(--danger-text); }
+
+.actionCategory {
+  padding: 2px 8px;
+  background: var(--accent-weak);
+  color: #1e3a8a;
+}
+
+.originalAction { color: var(--muted); }
+.originalAction summary { width: fit-content; cursor: pointer; font-weight: 700; }
+.originalAction div { margin-top: 4px; }
+
+.noteUrlList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.noteItem {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 7px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: #fbfdff;
+}
+
+.noteSourceOther { border-color: #f1c27d; background: #fffaf0; }
+
+.noteSourceBadge {
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  padding: 2px 7px;
+  border: 1px solid transparent;
+  font-size: 11px;
+}
+
+.noteSourceBadgeCisa { color: #174ea6; background: #e8f0fe; border-color: #c7d8ff; }
+.noteSourceBadgeNist { color: #365314; background: #ecfdf5; border-color: #bbf7d0; }
+.noteSourceBadgeOther { color: #92400e; background: #ffedd5; border-color: #fed7aa; }
+
+.noteBody {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.noteUrlMemo { color: #334155; font-weight: 700; }
+.noteBody a { overflow-wrap: anywhere; }
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 30px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  body { width: 100vw; }
+  header { align-items: flex-start; flex-direction: column; }
+  .headerActions { justify-content: flex-start; }
+  .toolbar,
+  body.kev-viewer-page .toolbar { grid-template-columns: 1fr; }
+  .toolbar .searchBox,
+  .toolbar .filterVulnerabilityType,
+  .toolbar .filterImpactTarget,
+  .toolbar .filterVendor,
+  .toolbar .filterCwe,
+  .toolbar .filterRansom,
+  .toolbar .filterPageSize,
+  .toolbar .deadlineFilterLabel,
+  .toolbar #exportButton,
+  .toolbar .clearFiltersButton { grid-column: 1 / -1; }
+  .deadlineFilterLabel { align-items: flex-start; flex-direction: column; }
+  .chipGroup { flex-wrap: wrap; overflow-x: visible; }
+  main,
+  body.kev-viewer-page main { padding: 10px; }
+}
