@@ -1,6 +1,6 @@
 # GitHub Pages 公開手順
 
-この版は GitHub Pages 専用です。Chrome 拡張機能用の `manifest.json`、`rules.json`、`popup.html` は含めていません。
+この版は GitHub Pages 専用です。
 
 ## 1. リポジトリへ配置
 
