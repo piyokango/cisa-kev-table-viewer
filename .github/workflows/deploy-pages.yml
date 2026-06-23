@@ -1,0 +1,59 @@
+name: Deploy KEV Viewer to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "15 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate JavaScript
+        run: node --check app.js
+
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare Pages artifact
+        run: |
+          set -eu
+          mkdir -p public/icons
+          cp index.html app.js style.css public/
+          cp icons/*.png public/icons/
+          curl -fsSL "https://raw.githubusercontent.com/cisagov/kev-data/develop/known_exploited_vulnerabilities.json" -o public/kev.json
+          python3 -m json.tool public/kev.json >/dev/null
+          touch public/.nojekyll
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
