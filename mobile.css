@@ -1,0 +1,259 @@
+@media (max-width: 700px) {
+  html {
+    overflow-x: hidden;
+  }
+
+  body,
+  body.kev-viewer-page {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    background: var(--bg);
+  }
+
+  body.kev-viewer-page header,
+  body.kev-viewer-page .toolbar,
+  body.kev-viewer-page .statusPanel,
+  body.kev-viewer-page footer {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  header {
+    position: static;
+    gap: 12px;
+  }
+
+  h1 {
+    font-size: 20px;
+    line-height: 1.25;
+  }
+
+  #summary {
+    line-height: 1.55;
+  }
+
+  .headerActions {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .metaChip,
+  .sourceLink,
+  .headerActions button {
+    min-height: 40px;
+  }
+
+  .metaChip {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .sourceLink,
+  .headerActions button,
+  .toolbar button {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .toolbar {
+    gap: 12px;
+  }
+
+  .toolbar input,
+  .toolbar select,
+  .toolbar button {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .searchBox input {
+    font-size: 16px;
+  }
+
+  .deadlineFilterLabel {
+    padding: 10px;
+  }
+
+  .chipGroup {
+    gap: 7px;
+  }
+
+  .chipGroup label {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+
+  main,
+  body.kev-viewer-page main {
+    padding: 12px;
+  }
+
+  .tableWrap,
+  body.kev-viewer-page .tableWrap {
+    max-height: none;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+  }
+
+  table {
+    background: transparent;
+  }
+
+  thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  tbody {
+    display: grid;
+    gap: 12px;
+  }
+
+  tbody tr {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+
+  tbody td {
+    min-width: 0 !important;
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 12px 12px;
+    white-space: normal !important;
+    background: #fff;
+    font-size: 13px;
+  }
+
+  tbody td:last-child {
+    border-bottom: 0;
+  }
+
+  tbody td::before {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .03em;
+  }
+
+  tbody td:nth-child(1)::before { content: "脆弱性名 / CVE"; }
+  tbody td:nth-child(2)::before { content: "ベンダ/製品 / 影響対象"; }
+  tbody td:nth-child(3)::before { content: "KEV追加日 / 対応期限"; }
+  tbody td:nth-child(4)::before { content: "ランサムウェア利用"; }
+  tbody td:nth-child(5)::before { content: "必要な対応"; }
+  tbody td:nth-child(6)::before { content: "備考"; }
+
+  tbody td.empty {
+    padding: 24px 16px;
+  }
+
+  tbody td.empty::before {
+    display: none;
+    content: "";
+  }
+
+  .vulnNameCell,
+  .productCell,
+  .actionCell,
+  .notesCell,
+  .dateDeadlineCell {
+    gap: 8px;
+  }
+
+  .vulnTopLine,
+  .impactTags,
+  .actionCategoryList {
+    gap: 6px;
+  }
+
+  .dateLine {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+    white-space: normal;
+  }
+
+  .dateMetaLabel {
+    min-width: 0;
+  }
+
+  .noteItem {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .noteSourceBadge {
+    justify-content: flex-start;
+    width: fit-content;
+  }
+
+  footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 3;
+    flex-wrap: wrap;
+    box-shadow: 0 -1px 0 rgba(15, 23, 42, 0.06);
+  }
+
+  footer button {
+    min-width: 96px;
+    min-height: 44px;
+  }
+
+  #pageInfo {
+    flex: 1 0 100%;
+    order: -1;
+    text-align: center;
+    color: var(--muted);
+    font-weight: 800;
+  }
+}
+
+@media (max-width: 420px) {
+  body.kev-viewer-page header,
+  body.kev-viewer-page .toolbar,
+  body.kev-viewer-page .statusPanel,
+  body.kev-viewer-page footer,
+  main,
+  body.kev-viewer-page main {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .headerActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sourceLink,
+  .headerActions button {
+    width: 100%;
+  }
+
+  tbody td {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
