@@ -158,12 +158,9 @@
     letter-spacing: .03em;
   }
 
-  tbody td:nth-child(1)::before { content: "脆弱性名 / CVE"; }
-  tbody td:nth-child(2)::before { content: "ベンダ/製品 / 影響対象"; }
-  tbody td:nth-child(3)::before { content: "KEV追加日 / 対応期限"; }
-  tbody td:nth-child(4)::before { content: "ランサムウェア利用"; }
-  tbody td:nth-child(5)::before { content: "必要な対応"; }
-  tbody td:nth-child(6)::before { content: "備考"; }
+tbody td[data-label]::before {
+  content: attr(data-label);
+}
 
   tbody td.empty {
     padding: 24px 16px;
