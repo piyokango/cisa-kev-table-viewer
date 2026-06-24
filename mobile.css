@@ -135,6 +135,21 @@
     box-shadow: var(--shadow);
   }
 
+  tbody tr,
+tbody td {
+  max-width: 100%;
+}
+
+
+  tbody td,
+.noteBody,
+.noteBody a,
+.originalAction,
+.originalAction div {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+  
   tbody td {
     min-width: 0 !important;
     width: 100%;
