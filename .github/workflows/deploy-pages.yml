@@ -40,7 +40,7 @@ jobs:
         run: |
           set -eu
           mkdir -p public/icons
-          cp index.html app.js style.css public/
+          cp index.html app.js style.css mobile.css public/
           cp icons/*.png public/icons/
           curl -fsSL "https://raw.githubusercontent.com/cisagov/kev-data/develop/known_exploited_vulnerabilities.json" -o public/kev.json
           python3 -m json.tool public/kev.json >/dev/null
