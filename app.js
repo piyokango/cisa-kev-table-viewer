@@ -805,24 +805,29 @@ function renderTable() {
   const fragment = document.createDocumentFragment();
   rows.forEach((row) => {
     const tr = document.createElement("tr");
-    appendCell(tr, createVulnerabilityNameCell(row));
-    appendCell(tr, createVendorProductCell(row));
-    appendCell(tr, createDateAndDeadlineCell(row));
-    appendCell(tr, createRansomBadge(row.knownRansomwareCampaignUse));
-    appendCell(tr, createRequiredActionCell(row));
-    appendCell(tr, createNotesCell(row.notes));
+appendCell(tr, createVulnerabilityNameCell(row), "脆弱性名 / CVE");
+appendCell(tr, createVendorProductCell(row), "ベンダ/製品 / 影響対象");
+appendCell(tr, createDateAndDeadlineCell(row), "KEV追加日 / 対応期限");
+appendCell(tr, createRansomBadge(row.knownRansomwareCampaignUse), "ランサムウェア利用");
+appendCell(tr, createRequiredActionCell(row), "必要な対応");
+appendCell(tr, createNotesCell(row.notes), "備考");
     fragment.appendChild(tr);
   });
   els.tableBody.appendChild(fragment);
 }
 
-function appendCell(tr, content) {
+function appendCell(tr, content, label = "") {
   const td = document.createElement("td");
+  if (label) {
+    td.dataset.label = label;
+  }
+
   if (content instanceof Node) {
     td.appendChild(content);
   } else {
     td.textContent = content || "-";
   }
+
   tr.appendChild(td);
 }
 
