@@ -435,7 +435,7 @@ function categorizeVulnerabilityName(name) {
     { label: "クロスサイトスクリプティング", category: "クロスサイトスクリプティング", patterns: [/cross-site scripting|cross site scripting|\bxss\b/i] },
     { label: "パストラバーサル", category: "パストラバーサル", patterns: [/path traversal|directory traversal|relative path traversal/i] },
     { label: "ファイル操作の不備", category: "ファイル操作の不備", patterns: [/arbitrary file (?:read|write|upload|download|deletion)|file upload|file inclusion|local file inclusion|remote file inclusion/i] },
-    { label: "情報漏えい", category: "情報漏えい", patterns: [/information disclosure|information leak|sensitive information|exposure of sensitive/i] },
+    { label: "情報 漏えい", category: "情報漏えい", patterns: [/information disclosure|information leak|sensitive information|exposure of sensitive/i] },
     { label: "デシリアライゼーション", category: "デシリアライゼーション", patterns: [/deserialization|unserialize|serialization/i] },
     { label: "SSRF", category: "SSRF", patterns: [/server-side request forgery|server side request forgery|\bssrf\b/i] },
     { label: "XXE", category: "XXE", patterns: [/xml external entity|\bxxe\b/i] },
