@@ -1,4 +1,4 @@
-const KEV_JSON_URL = "./kev.json" ;
+const KEV_JSON_URL = "./kev.json";
 const GITHUB_FALLBACK_URL = "https://raw.githubusercontent.com/cisagov/kev-data/develop/known_exploited_vulnerabilities.json";
 const VULNRICHMENT_RAW_URL = "https://raw.githubusercontent.com/cisagov/vulnrichment/develop";
 const CACHE_KEY = "cisaKevCache";
@@ -213,7 +213,7 @@ const CWE_NAME_JA = {
   "CWE-1336": "テンプレートエンジンにおける式の不適切な無害化",
   "CWE-1386": "安全でないデフォルト動作を伴うコマンド",
   "CWE-1390": "弱い認証",
-  "CWE-1393": "参照解決における安全でないデフォルト動作",
+  "CWE-1393": "参照解決における安全でないデフォルトの動作",
 };
 
 const state = {
