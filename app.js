@@ -1,4 +1,4 @@
-const KEV_JSON_URL = "./kev.json";
+const KEV_JSON_URL = "./kev.json" ;
 const GITHUB_FALLBACK_URL = "https://raw.githubusercontent.com/cisagov/kev-data/develop/known_exploited_vulnerabilities.json";
 const VULNRICHMENT_RAW_URL = "https://raw.githubusercontent.com/cisagov/vulnrichment/develop";
 const CACHE_KEY = "cisaKevCache";
